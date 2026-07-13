@@ -224,9 +224,9 @@ When an agent starts working on a symbol it sets a lock annotation so other inst
 ```json
 {
   "symbol_uri": "lip://local/src/payments.rs#processCharge",
-  "key":        "lip:nyx-agent-lock",
+  "key":        "lip:agent-lock",
   "value":      "{\"worktree\":\"/repo-work\",\"pid\":4821,\"started_at_ms\":1744320000000}",
-  "author_id":  "agent:nyx"
+  "author_id":  "agent:local"
 }
 ```
 
@@ -235,10 +235,10 @@ Before claiming a symbol, check for the lock. If the value is non-empty, a peer 
 After finishing, clear the lock by writing an empty value:
 
 ```json
-{ "symbol_uri": "...", "key": "lip:nyx-agent-lock", "value": "", "author_id": "agent:nyx" }
+{ "symbol_uri": "...", "key": "lip:agent-lock", "value": "", "author_id": "agent:local" }
 ```
 
-The lock key is agent-type-specific (`lip:nyx-agent-lock`, `lip:claude-agent-lock`, …) so two different agent types can work on the same symbol without blocking each other.
+The lock key is agent-type-specific (`lip:agent-lock`, `lip:claude-agent-lock`, …) so two different agent types can work on the same symbol without blocking each other.
 
 ---
 
@@ -253,7 +253,7 @@ Execute multiple queries in a single round-trip. One socket connection instead o
     { "type": "query_blast_radius", "symbol_uri": "lip://local/src/auth.rs#AuthService" },
     { "type": "query_references",   "symbol_uri": "lip://local/src/auth.rs#AuthService", "limit": 50 },
     { "type": "annotation_get",     "symbol_uri": "lip://local/src/auth.rs#AuthService", "key": "lip:fragile" },
-    { "type": "annotation_get",     "symbol_uri": "lip://local/src/auth.rs#AuthService", "key": "lip:nyx-agent-lock" }
+    { "type": "annotation_get",     "symbol_uri": "lip://local/src/auth.rs#AuthService", "key": "lip:agent-lock" }
   ]
 }
 ```
@@ -439,9 +439,9 @@ Remove index entries for files that no longer exist on disk. On long-running dae
 ```
 1. lip_workspace_symbols → collect URIs for all symbols you plan to touch
 2. lip_batch_query       → for each URI: blast_radius + references + annotation_get("lip:fragile")
-                           + annotation_get("lip:nyx-agent-lock")
+                           + annotation_get("lip:agent-lock")
                            — 10 symbols = 1 round-trip, not 40
-3. lip_annotation_set    → set lip:nyx-agent-lock on each claimed symbol
+3. lip_annotation_set    → set lip:agent-lock on each claimed symbol
 ```
 
 **Before modifying a single symbol:**
@@ -455,7 +455,7 @@ Remove index entries for files that no longer exist on disk. On long-running dae
 **After modifying code** (if the change is notable):
 ```
 lip_annotation_set("agent:note") → leave a note explaining what changed and why
-lip_annotation_set("lip:nyx-agent-lock", value="") → release the lock
+lip_annotation_set("lip:agent-lock", value="") → release the lock
 ```
 
 **Finding dead code:**

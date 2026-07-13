@@ -11,7 +11,7 @@ async function loadCargoToml() {
     return readFileSync(resolve(here, '../Cargo.toml'), 'utf8');
   } catch {
     // Vercel / out-of-tree build: fetch the canonical version from main.
-    const url = 'https://raw.githubusercontent.com/nyxCore-Systems/LIP/main/Cargo.toml';
+    const url = 'https://raw.githubusercontent.com/SimplyLiz/LIP/main/Cargo.toml';
     const res = await fetch(url);
     if (!res.ok) throw new Error(`astro.config: fetch ${url} → ${res.status}`);
     return await res.text();

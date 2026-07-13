@@ -6,6 +6,16 @@ All notable changes to this project are documented here.
 
 ## [Unreleased]
 
+## [2.3.6] — 2026-07-13
+
+**Debrand: drop the `nyx` name.** Renames the agent-lock annotation key
+`lip:nyx-agent-lock` → `lip:agent-lock` (author id `agent:nyx` → `agent:local`)
+across the docs, CLI schema, and website, moves the repository/org to
+`github.com/SimplyLiz/LIP`, and updates the crate author email to
+`lisa@tastehub.io`. Consumers reading the old key (e.g. CKB's `analyzeImpact`
+staleness check) are updated in lockstep to `lip:agent-lock`. No wire-protocol
+or behavior change; `protocol_version` stays at `2`.
+
 ## [2.3.5] — 2026-04-25
 
 **Forward-direction name-bridge symmetry.** Fixes `QueryOutgoingImpact` returning empty `direct_items` when the seed `symbol_uri` was indexed by a different provider than its callees — typically a SCIP-descriptor seed (`…#AnalyzeImpact().`) whose outgoing edges were recorded in tier-1 form (`…#AnalyzeImpact`), or vice versa. The reverse direction (`QueryBlastRadiusSymbol`) already handled this via the `callee_name_to_callers` name-bridge added in v2.3.2; the forward direction only consulted `caller_to_callees` by URI-exact match, so any caller-side SCIP/tier-1 mismatch produced zero direct hits even though `QueryBlastRadiusSymbol` on the same symbol worked. `protocol_version` stays at `2`; this is a pure correctness fix with no wire-shape change.
@@ -216,7 +226,7 @@ All notable changes to this project are documented here.
 - Library crate renamed from `lip` to `lip-core` on crates.io (name was taken)
 - All three crates now published: `lip-core`, `lip-cli`, `lip-registry`
 - Crates metadata: homepage → `https://lip-sigma.vercel.app`, docs linked, `rust-version = "1.78"`, READMEs added
-- Author email updated to `lisa@nyxcore.cloud`
+- Author email updated to `lisa@tastehub.io`
 
 ---
 

@@ -45,7 +45,7 @@ lip lsp --socket /tmp/lip.sock
 - [Documentation](https://lip-sigma.vercel.app/docs)
 - [Protocol Spec](https://lip-sigma.vercel.app/docs/spec)
 - [MCP Integration](https://lip-sigma.vercel.app/docs/mcp)
-- [GitHub](https://github.com/nyxCore-Systems/LIP)
+- [GitHub](https://github.com/SimplyLiz/LIP)
 
 ## License
 
