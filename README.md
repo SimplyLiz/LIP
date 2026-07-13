@@ -70,7 +70,7 @@ External packages are content-addressed blobs. `react@18.2.0` is indexed once �
 Tree-sitter (< 1 ms/file) gives symbol search and go-to-definition immediately on file open. The compiler runs on the blast radius in the background and silently upgrades those results to compiler-level precision. The IDE never blocks.
 
 **Persistent annotations.**  
-Symbols carry key/value annotations (`lip:fragile`, `team:owner`, `agent:note`, `lip:nyx-agent-lock`) that survive file changes, daemon restarts, and CI runs. Agents use these to coordinate work and leave notes that persist across sessions.
+Symbols carry key/value annotations (`lip:fragile`, `team:owner`, `agent:note`, `lip:agent-lock`) that survive file changes, daemon restarts, and CI runs. Agents use these to coordinate work and leave notes that persist across sessions.
 
 **Batch API.**  
 `BatchQuery` runs N queries under a single db lock acquisition — one Unix socket round-trip instead of N. Planning a 10-symbol refactor (blast radius + references + annotation checks per symbol) costs one connection instead of 30.
@@ -241,8 +241,8 @@ lip query export-embeddings file:///src/auth.rs file:///src/session.rs --output 
 
 **Recommended agent workflow before modifying code:**
 1. `lip_workspace_symbols` — find URIs for all symbols you plan to touch
-2. `lip_batch_query` — blast radius + references + `lip:fragile` + `lip:nyx-agent-lock` for each
-3. `lip_annotation_set` — set `lip:nyx-agent-lock` on claimed symbols
+2. `lip_batch_query` — blast radius + references + `lip:fragile` + `lip:agent-lock` for each
+3. `lip_annotation_set` — set `lip:agent-lock` on claimed symbols
 4. Make changes
 5. `lip_annotation_set` — release locks, leave notes
 

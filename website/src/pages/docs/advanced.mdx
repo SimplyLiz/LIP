@@ -145,9 +145,9 @@ Before an agent starts on a symbol, it claims it:
 
 ```bash
 lip annotate set "lip://local/src/payments.rs#processCharge" \
-  "lip:nyx-agent-lock" \
+  "lip:agent-lock" \
   '{"worktree":"/repo-work","pid":4821,"started_at_ms":1744320000000}' \
-  --author "agent:nyx"
+  --author "agent:local"
 ```
 
 ### Checking for conflicts
@@ -155,7 +155,7 @@ lip annotate set "lip://local/src/payments.rs#processCharge" \
 Before claiming, check if anyone else has it:
 
 ```bash
-lip annotate get "lip://local/src/payments.rs#processCharge" "lip:nyx-agent-lock"
+lip annotate get "lip://local/src/payments.rs#processCharge" "lip:agent-lock"
 # If empty: safe to claim
 # If non-empty: another agent is working on it — skip or wait
 ```
@@ -166,7 +166,7 @@ Use `lip_batch_query` to check blast radius + lock in one round-trip:
 {
   "queries": [
     { "type": "query_blast_radius", "symbol_uri": "lip://local/src/payments.rs#processCharge" },
-    { "type": "annotation_get", "symbol_uri": "lip://local/src/payments.rs#processCharge", "key": "lip:nyx-agent-lock" },
+    { "type": "annotation_get", "symbol_uri": "lip://local/src/payments.rs#processCharge", "key": "lip:agent-lock" },
     { "type": "annotation_get", "symbol_uri": "lip://local/src/payments.rs#processCharge", "key": "lip:do-not-touch" }
   ]
 }
@@ -178,8 +178,8 @@ After finishing:
 
 ```bash
 lip annotate set "lip://local/src/payments.rs#processCharge" \
-  "lip:nyx-agent-lock" "" \
-  --author "agent:nyx"
+  "lip:agent-lock" "" \
+  --author "agent:local"
 ```
 
 Setting an empty value clears the lock.
@@ -188,11 +188,11 @@ Setting an empty value clears the lock.
 
 | Key | Agent type |
 |-----|-----------|
-| `lip:nyx-agent-lock` | Nyx workers |
+| `lip:agent-lock` | Generic agents |
 | `lip:claude-agent-lock` | Claude Code |
 | `lip:do-not-touch` | Universal freeze (all agents respect this) |
 
-Different agent types use different lock keys, so a Nyx worker and a Claude agent can work on the same symbol simultaneously without blocking each other. To block all agents, use `lip:do-not-touch`.
+Different agent types use different lock keys, so a generic agent and a Claude agent can work on the same symbol simultaneously without blocking each other. To block all agents, use `lip:do-not-touch`.
 
 ---
 

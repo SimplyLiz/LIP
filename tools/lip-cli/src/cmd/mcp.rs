@@ -945,7 +945,7 @@ fn tools_manifest() -> Value {
                     "symbol_uri": { "type": "string" },
                     "key": {
                         "type": "string",
-                        "description": "e.g. 'team:owner', 'lip:fragile', 'agent:note', 'lip:nyx-agent-lock'"
+                        "description": "e.g. 'team:owner', 'lip:fragile', 'agent:note', 'lip:agent-lock'"
                     },
                     "value":     { "type": "string" },
                     "author_id": {

@@ -60,7 +60,7 @@ LIP_REGISTRY=https://your-registry.internal lip daemon
 
 - [Registry & Slices docs](https://lip-sigma.vercel.app/docs/registry)
 - [lip-cli on crates.io](https://crates.io/crates/lip-cli)
-- [GitHub](https://github.com/nyxCore-Systems/LIP)
+- [GitHub](https://github.com/SimplyLiz/LIP)
 
 ## License
 
