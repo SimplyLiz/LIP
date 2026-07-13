@@ -25,7 +25,7 @@ use lip::schema::OwnedSymbolInfo;
 
 - [Documentation](https://lip-sigma.vercel.app/docs)
 - [Protocol Spec](https://lip-sigma.vercel.app/docs/spec)
-- [GitHub](https://github.com/nyxCore-Systems/LIP)
+- [GitHub](https://github.com/SimplyLiz/LIP)
 - [lip-cli on crates.io](https://crates.io/crates/lip-cli)
 
 ## License

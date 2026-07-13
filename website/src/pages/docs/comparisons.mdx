@@ -68,7 +68,7 @@ LIP (Linked Incremental Protocol) is a persistent daemon that keeps a live query
 **Strengths:**
 - **Always current**: every file save updates the affected symbols in &lt;1 ms
 - **Blast radius**: first-class concept — tracks a reverse dependency graph per symbol, computes direct and transitive dependents, assigns a risk level
-- **Persistent annotations**: symbols can carry key/value annotations (`lip:fragile`, `team:owner`, `agent:note`, `lip:nyx-agent-lock`) that survive file changes and daemon restarts
+- **Persistent annotations**: symbols can carry key/value annotations (`lip:fragile`, `team:owner`, `agent:note`, `lip:agent-lock`) that survive file changes and daemon restarts
 - **Federated dependency slices**: external packages are content-addressed blobs indexed once by anyone on the team
 - **Batch API**: `BatchQuery` runs N queries under a single db lock — one round-trip instead of N
 - **AI-native**: MCP server, agent-lock annotations, `SimilarSymbols` fuzzy search, semantic embeddings
